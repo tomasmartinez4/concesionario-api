@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "@ngrx/effects": "^19.1.0",
+    "@ngrx/store": "^19.1.0",
+    "@ngrx/store-devtools": "^19.1.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^19.1.0"
+  }
+}
