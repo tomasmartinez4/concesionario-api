@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConcesionarioApi", "ConcesionarioApi.csproj", "{096FD644-8E6C-41DB-8CD5-96E4B85D1DFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcesionarioApi.Tests", "..\ConcesionarioApi.Tests\ConcesionarioApi.Tests.csproj", "{1D3994E4-C589-42D9-AA62-2EF5E1460B1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{096FD644-8E6C-41DB-8CD5-96E4B85D1DFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{096FD644-8E6C-41DB-8CD5-96E4B85D1DFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{096FD644-8E6C-41DB-8CD5-96E4B85D1DFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{096FD644-8E6C-41DB-8CD5-96E4B85D1DFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D3994E4-C589-42D9-AA62-2EF5E1460B1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D3994E4-C589-42D9-AA62-2EF5E1460B1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D3994E4-C589-42D9-AA62-2EF5E1460B1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D3994E4-C589-42D9-AA62-2EF5E1460B1F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {50E55FD5-D93F-4655-A8F8-834A45627F60}
+	EndGlobalSection
+EndGlobal

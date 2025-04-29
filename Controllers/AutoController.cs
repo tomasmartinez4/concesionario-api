@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ConcesionarioApi.Models;
 using ConcesionarioApi.Services;
+using ConcesionarioApi.DTOs;
 
 namespace ConcesionarioApi.Controllers
 {
@@ -8,41 +9,39 @@ namespace ConcesionarioApi.Controllers
     [Route("api/[controller]")]
     public class AutoController : ControllerBase
     {
-        private readonly AutoService _service;
+        private readonly IAutoService _svc;
 
-        public AutoController(AutoService service)
+        public AutoController(IAutoService svc)
         {
-            _service = service;
+            _svc = svc;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(await _service.GetAllAsync());
+        public async Task<IEnumerable<AutoDto>> Get() => (await _svc.GetAllAsync());
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var auto = await _service.GetByIdAsync(id);
-            return auto == null ? NotFound() : Ok(auto);
-        }
+        public async Task<ActionResult<AutoDto>> Get(int id) =>
+            Ok(await _svc.GetByIdAsync(id));
+        
         [HttpPost]
-        public async Task<IActionResult> Create(Auto auto)
+        public async Task<ActionResult<AutoDto>> Post(CreateAutoDto dto)
         {
-            await _service.AddAsync(auto);
-            return CreatedAtAction(nameof(GetById), new { id = auto.Id }, auto);
+            var created = await _svc.CreateAsync(dto);
+            return CreatedAtAction(nameof(Get), new {id = created.Id}, created);
+
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Auto auto)
+        public async Task<IActionResult> Put(int id, UpdateAutoDto dto)
         {
-            if (id != auto.Id) return BadRequest();
-            await _service.UpdateAsync(auto);
+            await _svc.UpdateAsync(id, dto);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _service.DeleteAsync(id);
+            await _svc.DeleteAsync(id);
             return NoContent();
         }
 
