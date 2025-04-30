@@ -2,12 +2,7 @@
 
 namespace ConcesionarioApi.Interfaces
 {
-    public interface IAutoRepository
+    public interface IAutoRepository : IRepository<Auto>
     {
-        Task<IEnumerable<Auto>> GetAllAsync();
-        Task<Auto?> GetByIdAsync(int id);
-        Task AddAsync (Auto auto);
-        Task UpdateAsync (Auto auto);
-        Task DeleteAsync (int id);
     }
 }

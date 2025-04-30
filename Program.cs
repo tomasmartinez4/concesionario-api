@@ -21,6 +21,7 @@ builder.Services.AddDbContext<ConcesionarioDbContext>(options =>
                      ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
 //Repository y Service
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IAutoRepository, AutoRepository>();
 builder.Services.AddScoped<IAutoService, AutoService>();
 
@@ -31,9 +32,7 @@ builder.Services.AddAutoMapper(typeof(AutoProfile).Assembly);
 builder.Services
     .AddControllers()
     .AddFluentValidation(fv =>
-    {
-        fv.RegisterValidatorsFromAssemblyContaining<CreateAutoDtoValidator>();
-    });
+    fv.RegisterValidatorsFromAssemblyContaining<CreateAutoDtoValidator>());
 
 //Cors
 builder.Services.AddCors(options =>

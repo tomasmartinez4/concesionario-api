@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace ConcesionarioApi.Tests.Services
 {
+
     [TestClass]
     public class AutoServiceTests
     {
@@ -29,10 +30,7 @@ namespace ConcesionarioApi.Tests.Services
 
             // 2)COnfig Automapper
 
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<AutoProfile>();
-            });
+            var config = new MapperConfiguration(cfg => cfg.AddProfile<AutoProfile>());
             _mapper = config.CreateMapper();
 
             // 3) Creamos el servicio y le inyectamos el repo mock y el mapper
@@ -119,7 +117,37 @@ namespace ConcesionarioApi.Tests.Services
             _repoMock.Verify(r => r.UpdateAsync(existing), Times.Once);
 
         }
-    
-    } 
+
+        [TestMethod]
+        public async Task CreateAsync_WhenCalled_InvokesRepoAddAndReturnsDto()
+        {
+            // Arrange
+            var dto = new CreateAutoDto { Marca = "Mazda", Modelo = "3", Anio = 2022, Precio = 18000 };
+            Auto? captured = null;
+            _repoMock
+              .Setup(r => r.AddAsync(It.IsAny<Auto>()))
+              .Callback<Auto>(a => captured = a)
+              .Returns(Task.CompletedTask);
+
+            // Act
+            var result = await _service.CreateAsync(dto);
+
+            // Assert
+            _repoMock.Verify(r => r.AddAsync(It.IsAny<Auto>()), Times.Once);
+            Assert.IsNotNull(captured);
+            Assert.AreEqual("Mazda", captured!.Marca);
+            Assert.AreEqual("3", captured.Modelo);
+            Assert.AreEqual(2022, captured.Anio);
+            Assert.AreEqual(18000m, captured.Precio);
+
+            //  devuelve el DTO mapeado
+            Assert.AreEqual(captured.Marca, result.Marca);
+            Assert.AreEqual(captured.Modelo, result.Modelo);
+            Assert.AreEqual(captured.Anio, result.Anio);
+            Assert.AreEqual(captured.Precio, result.Precio);
+        }
+
+
+    }
 
 }
